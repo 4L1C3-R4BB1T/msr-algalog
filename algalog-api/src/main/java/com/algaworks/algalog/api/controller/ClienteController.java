@@ -3,16 +3,24 @@ package com.algaworks.algalog.api.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algalog.domain.model.Cliente;
+import com.algaworks.algalog.domain.repository.ClienteRepository;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @RestController
+@RequestMapping("/api/v1/clientes")
 public class ClienteController {
 	
-	@GetMapping("/clientes")
+	private ClienteRepository clienteRepository;
+	
+	@GetMapping
 	public List<Cliente> listar() {		
-		return null;
+		return clienteRepository.findAll();
 	}
 
 }
