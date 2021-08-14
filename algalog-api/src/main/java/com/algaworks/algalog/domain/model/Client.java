@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Cliente {
+public class Client {
 	
 	@EqualsAndHashCode.Include
 	@Id
@@ -25,7 +25,7 @@ public class Cliente {
 	
 	@NotBlank
 	@Size(max = 60)
-	private String nome;
+	private String name;
 	
 	@Email
 	@NotBlank
@@ -34,6 +34,6 @@ public class Cliente {
 	
 	@NotBlank
 	@Size(max = 20)
-	private String telefone;
+	private String phone;
 	
 }
