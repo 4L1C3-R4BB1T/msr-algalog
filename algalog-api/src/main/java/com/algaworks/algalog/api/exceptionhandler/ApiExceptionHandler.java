@@ -13,8 +13,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.algaworks.algalog.domain.exception.BusinessException;
 
 import lombok.AllArgsConstructor;
 
@@ -28,18 +31,30 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
-		List<Field> fields = new ArrayList<>();
+		List<Problem.Field> fields = new ArrayList<>();
 		
 		for (ObjectError error : ex.getBindingResult().getAllErrors()) {
 			String name = ((FieldError) error).getField();
 			String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
 			
-			fields.add(new Field(name, message));
+			fields.add(new Problem.Field(name, message));
 		}
 		
 		Problem problem = new Problem(status.value(), LocalDateTime.now(), 
 				"Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.", fields);
 		return handleExceptionInternal(ex, problem, headers, status, request);
+	}
+	
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		Problem problem = new Problem();
+		problem.setStatus(status.value());
+		problem.setDateTime(LocalDateTime.now());
+		problem.setTitle(ex.getMessage());
+		
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
 	
 }
