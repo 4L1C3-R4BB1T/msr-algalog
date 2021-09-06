@@ -1,6 +1,6 @@
 package com.algaworks.algalog.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 			fields.add(new Problem.Field(name, message));
 		}
 		
-		Problem problem = new Problem(status.value(), LocalDateTime.now(), 
+		Problem problem = new Problem(status.value(), OffsetDateTime.now(), 
 				"Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.", fields);
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
@@ -51,7 +51,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		Problem problem = new Problem();
 		problem.setStatus(status.value());
-		problem.setDateTime(LocalDateTime.now());
+		problem.setDateTime(OffsetDateTime.now());
 		problem.setTitle(ex.getMessage());
 		
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);

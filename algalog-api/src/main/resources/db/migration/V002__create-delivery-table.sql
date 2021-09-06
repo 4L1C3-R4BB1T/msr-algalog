@@ -3,13 +3,13 @@ create table delivery (
 	client_id bigint not null,
 	tax decimal(10,2) not null,
 	status varchar(20) not null,
-	requestDate datetime not null,
-	completionDate datetime,
-	receiver_name vachar(60) not null,
-	receiver_street vachar(255) not null,
+	request_date datetime not null,
+	completion_date datetime,
+	receiver_name varchar(60) not null,
+	receiver_street varchar(255) not null,
 	receiver_number varchar(30) not null,
 	receiver_complement varchar(60),
-	receiver_neighborhood varchar(30) notnull,
+	receiver_neighborhood varchar(30) not null,
 	primary key (id)
 );
 

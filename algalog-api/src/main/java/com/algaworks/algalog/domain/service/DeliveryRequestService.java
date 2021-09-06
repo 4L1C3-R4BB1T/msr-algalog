@@ -1,6 +1,6 @@
 package com.algaworks.algalog.domain.service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +25,7 @@ public class DeliveryRequestService {
 		
 		delivery.setClient(client);
 		delivery.setStatus(DeliveryStatus.PENDING);
-		delivery.setRequestDate(LocalDateTime.now());
+		delivery.setRequestDate(OffsetDateTime.now());
 		
 		return deliveryRepository.save(delivery);
 	}
