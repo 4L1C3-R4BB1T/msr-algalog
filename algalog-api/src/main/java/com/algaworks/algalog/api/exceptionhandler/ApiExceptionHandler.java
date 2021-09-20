@@ -18,6 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.algaworks.algalog.domain.exception.BusinessException;
+import com.algaworks.algalog.domain.exception.EntityNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -48,6 +49,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		Problem problem = new Problem();
+		problem.setStatus(status.value());
+		problem.setDateTime(OffsetDateTime.now());
+		problem.setTitle(ex.getMessage());
+		
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+	}
+	
+	@ExceptionHandler(EntityNotFoundException.class)
+	public ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex, WebRequest request) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
 		
 		Problem problem = new Problem();
 		problem.setStatus(status.value());
