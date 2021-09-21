@@ -40,7 +40,7 @@ public class Delivery {
 	private BigDecimal tax;
 	
 	@OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
-	private List<Occurrence> ocurrencies = new ArrayList<>();
+	private List<Occurrence> occurrences = new ArrayList<>();
 	
 	@Enumerated(EnumType.STRING)
 	private DeliveryStatus status;
@@ -55,7 +55,7 @@ public class Delivery {
 		occurrence.setRecordDate(OffsetDateTime.now());
 		occurrence.setDelivery(this);
 		
-		this.getOcurrencies().add(occurrence);
+		this.getOccurrences().add(occurrence);
 		
 		return occurrence;
 	}

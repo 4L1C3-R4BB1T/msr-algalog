@@ -1,5 +1,8 @@
 package com.algaworks.algalog.api.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +21,10 @@ public class OccurrenceMapper {
 		return modelMapper.map(occurrence, OccurrenceModel.class);
 	}
 
+	public List<OccurrenceModel> toCollectionModel(List<Occurrence> occurrences) {
+		return occurrences.stream()
+				.map(this::toModel)
+				.collect(Collectors.toList());
+	}
+	
 }
