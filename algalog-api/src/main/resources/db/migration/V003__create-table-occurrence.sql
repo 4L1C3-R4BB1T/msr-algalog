@@ -1,8 +1,8 @@
 create table occurrence (
-	id bigint not null auto_increment,
+	id bigserial not null,
 	delivery_id bigint not null,
 	description text not null,
-	record_date datetime not null,
+	record_date timestamp not null,
 	primary key (id)
 );
 

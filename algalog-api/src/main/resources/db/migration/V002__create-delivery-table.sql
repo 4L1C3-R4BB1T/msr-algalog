@@ -1,10 +1,10 @@
 create table delivery (
-	id bigint not null auto_increment,
+	id bigserial not null,
 	client_id bigint not null,
 	tax decimal(10,2) not null,
 	status varchar(20) not null,
-	request_date datetime not null,
-	completion_date datetime,
+	request_date timestamp not null,
+	completion_date timestamp,
 	receiver_name varchar(60) not null,
 	receiver_street varchar(255) not null,
 	receiver_number varchar(30) not null,
