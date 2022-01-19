@@ -1,3 +1,5 @@
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/4L1C3-R4BB1T/msr-algalog/blob/main/LICENSE) 
+
 ## Sobre
 Desenvolvimento de uma API REST de gerenciamento de entregas durante o evento Mergulho Spring REST da [AlgaWorks](https://www.algaworks.com "Site da AlgaWorks").
 
